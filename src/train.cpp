@@ -1,55 +1,55 @@
 // Copyright 2022 NNTU-CS
 #include "train.h"
 
-Train::Train() : entryPoint(nullptr), stepCounter(0) {}
+Train::Train() : first(nullptr), countOp(0) {}
 
-void Train::addWagon(bool lampState) {
-  Wagon* fresh = new Wagon{lampState, nullptr, nullptr};
-  if (!entryPoint) {
-    entryPoint = fresh;
+void Train::addCar(bool lightState) {
+  Car* fresh = new Car{lightState, nullptr, nullptr};
+  if (!first) {
+    first = fresh;
     fresh->next = fresh;
     fresh->prev = fresh;
   } else {
-    Wagon* tail = entryPoint->prev;
-    fresh->next = entryPoint;
+    Car* tail = first->prev;
+    fresh->next = first;
     fresh->prev = tail;
     tail->next = fresh;
-    entryPoint->prev = fresh;
+    first->prev = fresh;
   }
 }
 
-int Train::calculateLength() {
-  if (!entryPoint) return 0;
+int Train::getLength() {
+  if (!first) return 0;
 
-  stepCounter = 0;
-  Wagon* current = entryPoint;
+  countOp = 0;
+  Car* current = first;
 
-  if (!current->lamp) current->lamp = true;
+  if (!current->light) current->light = true;
 
   while (true) {
     int forwardSteps = 0;
-    Wagon* runner = current;
+    Car* runner = current;
 
     do {
       runner = runner->next;
       ++forwardSteps;
-      ++stepCounter;
-    } while (!runner->lamp);
+      ++countOp;
+    } while (!runner->light);
 
-    runner->lamp = false;
+    runner->light = false;
 
-    const Wagon* backtrack = runner;
+    const Car* backtrack = runner;
     for (int i = 0; i < forwardSteps; ++i) {
       backtrack = backtrack->prev;
-      ++stepCounter;
+      ++countOp;
     }
 
-    if (backtrack == current && !backtrack->lamp) {
+    if (backtrack == current && !backtrack->light) {
       return forwardSteps;
     }
   }
 }
 
-int Train::getStepCount() const {
-  return stepCounter;
+int Train::getOpCount() {
+  return countOp;
 }
