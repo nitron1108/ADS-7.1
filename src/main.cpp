@@ -6,11 +6,11 @@
 #include "train.h"
 
 int main() {
-  srand(time (nullptr));
+  srand(time(nullptr));
   for (int n = 10; n <= 500; n += 10) {
     //все выключены
     Train trainOff;
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
       trainOff.addCar(false);
     }
     trainOff.getLength();
@@ -36,7 +36,7 @@ int main() {
       << n << " "
       << offOps << " "
       << onOps << " "
-      << randomsOps << std::endl; 
+      << randomsOps << std::endl;
   }
   return 0;
 }
