@@ -6,8 +6,8 @@
 #include "train.h"
 
 int main() {
-  srand (time (nullptr));
-  for (int n = 10; n <= 500; n += 10){
+  srand(time (nullptr));
+  for (int n = 10; n <= 500; n += 10) {
     //все выключены
     Train trainOff;
     for (int i = 0; i < n; i++){
@@ -18,7 +18,7 @@ int main() {
 
     //все включены
     Train trainOn;
-    for (int i = 0; i < n; i++){
+    for (int i = 0; i < n; i++) {
       trainOn.addCar(true);
     }
     trainOn.getLength();
@@ -26,8 +26,8 @@ int main() {
 
     //случайным образом
     Train trainRandoms;
-    for (int i = 0; i < n; i++){
-      trainRandoms.addCar(rand() % 2);
+    for (int i = 0; i < n; i++) {
+      trainRandoms.addCar(std::rand() % 2);
     }
     trainRandoms.getLength();
     int randomsOps = trainRandoms.getOpCount();
@@ -36,7 +36,7 @@ int main() {
       << n << " "
       << offOps << " "
       << onOps << " "
-      << randomsOps << std::endl;  
+      << randomsOps << std::endl; 
   }
   return 0;
 }
